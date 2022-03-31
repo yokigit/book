@@ -8,6 +8,7 @@ public class ExceptionTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int num2 = scanner.nextInt();
+        System.out.println("hhh"+"abv");
 //        main(args);
         //OutOfMemoryError
 //        Integer[] arr=new Integer[1024*1024*1024];
@@ -18,7 +19,7 @@ public class ExceptionTest {
         String str = "<h1><div><a href=''>nihao</a></div></h1>";
         String abc = "abc";
         System.out.println("\"aab\" = " + "aab");
-    
+
         //FileNotFoundException
 //        File file=new File("hello.txt");
 //        FileInputStream fileInputStream=new FileInputStream(file);
