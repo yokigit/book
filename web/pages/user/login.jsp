@@ -1,10 +1,13 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>尚硅谷会员登录页面</title>
-	<base href="http://localhost:8080/book/">
-    <link href="static/css/style.css" rel="stylesheet" type="text/css">
+    <%--  包含base标签，css样式，jQuery文件  --%>
+    <%@ include file="/pages/common/head.jsp" %>
+
 </head>
 <body>
 <div id="login_header">
@@ -22,17 +25,24 @@
             <div class="login_box">
                 <div class="tit">
                     <h1>尚硅谷会员</h1>
-                    <a href="regist.html">立即注册</a>
+                    <a href="pages/user/register.jsp">立即注册</a>
                 </div>
                 <div class="msg_cont">
                     <b></b>
-                    <span class="errorMsg">请输入用户名和密码</span>
+
+                    <%--  用户名和密码错误提示 --%>
+                    <c:if test="${empty requestScope.msg}">
+                        <span class="errorMsg">请输入用户名和密码</span>
+                    </c:if>
+                    <span class="errorMsg">${requestScope.msg}</span>
+
                 </div>
                 <div class="form">
-                    <form action="http://localhost:8080/book/loginServlet" method="post">
+                    <form action="http://localhost:8080/book/userServlet" method="post">
                         <label>用户名称：</label>
                         <input autocomplete="off" class="itxt" name="username" placeholder="请输入用户名" tabindex="1"
-                               type="text"/>
+                               type="text"
+                               value="<%=request.getAttribute("username")==null?"":request.getAttribute("username")%>"/>
                         <br/>
                         <br/>
                         <label>用户密码：</label>
@@ -40,6 +50,9 @@
                                type="password"/>
                         <br/>
                         <br/>
+
+                        <input type="hidden" name="action" value="login"/>
+
                         <input id="sub_btn" type="submit" value="登录"/>
                     </form>
                 </div>
@@ -48,10 +61,6 @@
         </div>
     </div>
 </div>
-<div id="bottom">
-			<span>
-				尚硅谷书城.Copyright &copy;2015
-			</span>
-</div>
+<%@ include file="/pages/common/foot.jsp" %>
 </body>
 </html>

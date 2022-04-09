@@ -24,23 +24,30 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(null, username, password, email);
 
         if ("abcde".equalsIgnoreCase(code)) {
+
+
             if (userService.isExistUsername(username)) {
-                System.out.println("用户已存在");
-                req.getRequestDispatcher("/pages/user/regist.html").forward(req, resp);
+                req.setAttribute("errorMsg","用户已存在");
+                req.setAttribute("username",username);
+                req.setAttribute("email",email);
+
+                req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
             } else {
 
-                if(userService.register(user)){
+                if (userService.register(user)) {
                     System.out.println("注册成功");
-                    req.getRequestDispatcher("/pages/user/regist_success.html").forward(req, resp);
-                }else{
+                    req.getRequestDispatcher("/pages/user/register_success.jsp").forward(req, resp);
+                } else {
                     System.out.println("数据库操作失败，注册失败");
-                    req.getRequestDispatcher("/pages/user/regist.html").forward(req, resp);
+                    req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
                 }
             }
         } else {
-            System.out.println("验证码不正确");
-            req.getRequestDispatcher("/pages/user/regist.html").forward(req, resp);
-        }
+            req.setAttribute("errorMsg","验证码错误");
+            req.setAttribute("username",username);
+            req.setAttribute("email",email);
 
+            req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
+        }
     }
 }

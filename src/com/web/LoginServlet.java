@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
 
-    private UserService userService = new UserServiceImpl();
+    private final UserService userService = new UserServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
@@ -20,10 +20,14 @@ public class LoginServlet extends HttpServlet {
         User user = new User(null, username, password, null);
         if (userService.Login(user) != null) {
             System.out.println("登录成功");
-            request.getRequestDispatcher("/pages/user/login_success.html").forward(request, response);
+            request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request, response);
         } else {
+
+            request.setAttribute("msg", "用户名或密码错误");
+            request.setAttribute("username", username);
+
             System.out.println("用户名或者密码不正确");
-            request.getRequestDispatcher("/pages/user/login.html").forward(request, response);
+            request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
         }
     }
 
