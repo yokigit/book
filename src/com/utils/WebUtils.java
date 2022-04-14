@@ -19,4 +19,22 @@ public class WebUtils {
         }
         return bean;
     }
+
+    public static int parseInt(String strInt,int defaultValue){
+        try {
+            return Integer.parseInt(strInt);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return defaultValue;
+    }
+
+    public static double parseDouble(String strDouble,double defaultValue){
+        try {
+            return Double.parseDouble(strDouble);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return defaultValue;
+    }
 }

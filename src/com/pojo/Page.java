@@ -21,15 +21,19 @@ public class Page<T> {
     //每页的记录
     private List<T> items;
 
+    //url
+    private String url;
+
     public Page() {
     }
 
-    public Page(Integer pageNo, Integer pageTotal, Integer pageTotalCount, Integer pageSize, List<T> items) {
+    public Page(Integer pageNo, Integer pageTotal, Integer pageTotalCount, Integer pageSize, List<T> items, String url) {
         this.pageNo = pageNo;
         this.pageTotal = pageTotal;
         this.pageTotalCount = pageTotalCount;
         this.pageSize = pageSize;
         this.items = items;
+        this.url = url;
     }
 
     public Integer getPageNo() {
@@ -79,6 +83,14 @@ public class Page<T> {
         this.items = items;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "Page{" +
@@ -87,6 +99,7 @@ public class Page<T> {
                 ", pageTotalCount=" + pageTotalCount +
                 ", pageSize=" + pageSize +
                 ", items=" + items +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

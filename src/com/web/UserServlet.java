@@ -3,32 +3,28 @@ package com.web;
 import com.pojo.User;
 import com.service.UserService;
 import com.service.impl.UserServiceImpl;
+import com.utils.WebUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @program: spring5_demo1
  * @author: yoki
  * @create: 2022-04-09 21:12
  */
-public class UserServlet extends HttpServlet {
+public class UserServlet extends BaseServlet {
     private final UserService userService = new UserServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if (action.equals("login")) {
-            Login(req, resp);
-        } else {
-            Register(req, resp);
-        }
+        super.doPost(req, resp);
     }
 
-    protected void Login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = new User(null, username, password, null);
@@ -45,20 +41,21 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    protected void Register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        String email = req.getParameter("email");
+    protected void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        String username = req.getParameter("username");
+//        String password = req.getParameter("password");
+//        String email = req.getParameter("email");
         String code = req.getParameter("code");
 
-        User user = new User(null, username, password, email);
+        Map<String, String[]> parameterMap = req.getParameterMap();
+        User user = WebUtils.copyParamToBean(new User(), parameterMap);
 
         if ("abcde".equalsIgnoreCase(code)) {
 
-            if (userService.isExistUsername(username)) {
+            if (userService.isExistUsername(user.getUsername())) {
                 req.setAttribute("errorMsg", "用户已存在");
-                req.setAttribute("username", username);
-                req.setAttribute("email", email);
+                req.setAttribute("username", user.getUsername());
+                req.setAttribute("email", user.getEmail());
 
                 req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
             } else {
@@ -73,8 +70,8 @@ public class UserServlet extends HttpServlet {
             }
         } else {
             req.setAttribute("errorMsg", "验证码错误");
-            req.setAttribute("username", username);
-            req.setAttribute("email", email);
+            req.setAttribute("username", user.getUsername());
+            req.setAttribute("email", user.getEmail());
 
             req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
         }

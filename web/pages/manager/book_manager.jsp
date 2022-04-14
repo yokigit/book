@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,16 +7,23 @@
     <title>图书管理</title>
     <%--  包含base标签，css样式，jQuery文件  --%>
     <%@ include file="/pages/common/head.jsp" %>
+    <script type="text/javascript">
+        $(function () {
+            $("a.deleteClass").click(function () {
+                return confirm("确定删除《" + $(this).parent().parent().find("td:first").text() + "》");
+            })
+        });
+    </script>
 </head>
 <body>
 
 <div id="header">
-    <img class="logo_img" alt="" src="../../static/img/logo.gif">
+    <img class="logo_img" alt="" src="static/img/logo.gif">
     <span class="wel_word">图书管理系统</span>
     <%--  包含管理员菜单栏  --%>
-    <%@ include file="/pages/common/manager_menu.jsp"%>
+    <%@ include file="/pages/common/manager_menu.jsp" %>
 </div>
-
+<%--<c:set scope="page" var="page" value="${requestScope.bookPage}"/>--%>
 <div id="main">
     <table>
         <tr>
@@ -25,45 +34,22 @@
             <td>库存</td>
             <td colspan="2">操作</td>
         </tr>
-        <tr>
-            <td>时间简史</td>
-            <td>20.00</td>
-            <td>霍金</td>
-            <td>200</td>
-            <td>400</td>
-            <td><a href="book_edit.jsp">修改</a></td>
-            <td><a href="#">删除</a></td>
-        </tr>
-
-        <tr>
-            <td>时间简史</td>
-            <td>20.00</td>
-            <td>霍金</td>
-            <td>200</td>
-            <td>400</td>
-            <td><a href="book_edit.jsp">修改</a></td>
-            <td><a href="#">删除</a></td>
-        </tr>
-
-        <tr>
-            <td>时间简史</td>
-            <td>20.00</td>
-            <td>霍金</td>
-            <td>200</td>
-            <td>400</td>
-            <td><a href="book_edit.jsp">修改</a></td>
-            <td><a href="#">删除</a></td>
-        </tr>
-
-        <tr>
-            <td>时间简史</td>
-            <td>20.00</td>
-            <td>霍金</td>
-            <td>200</td>
-            <td>400</td>
-            <td><a href="book_edit.jsp">修改</a></td>
-            <td><a href="#">删除</a></td>
-        </tr>
+        <c:forEach items="${requestScope.bookPage.items}" var="book">
+            <tr>
+                <td>${book.name}</td>
+                <td>${book.price}</td>
+                <td>${book.author}</td>
+                <td>${book.sales}</td>
+                <td>${book.stock}</td>
+                <td>
+                    <a href="${requestScope.bookPage.url}?action=getBook&id=${book.id}&pageNo=${requestScope.bookPage.pageNo}">修改</a>
+                </td>
+                <td>
+                    <a class="deleteClass"
+                       href="${requestScope.bookPage.url}?action=delete&id=${book.id}&pageNo=${requestScope.bookPage.pageTotalCount%requestScope.bookPage.pageSize!=1?requestScope.bookPage.pageNo:(requestScope.bookPage.pageNo==requestScope.bookPage.pageTotal?requestScope.bookPage.pageNo-1:requestScope.bookPage.pageNo)}">删除</a>
+                </td>
+            </tr>
+        </c:forEach>
 
         <tr>
             <td></td>
@@ -72,11 +58,19 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="book_edit.jsp">添加图书</a></td>
+            <%--   添加后需要跳转到的页码   --%>
+            <td>
+                <a href="pages/manager/book_edit.jsp?action=add&pageNo=${requestScope.bookPage.pageTotalCount%requestScope.bookPage.pageSize!=0?requestScope.bookPage.pageTotal:requestScope.bookPage.pageTotal+1}">添加图书</a>
+            </td>
         </tr>
+
     </table>
+
+    <%-- 静态包含分页条 --%>
+    <%@include file="/pages/common/page_nav.jsp" %>
+
 </div>
 
-<%@ include file="/pages/common/foot.jsp"%>
+<%@ include file="/pages/common/foot.jsp" %>
 </body>
 </html>

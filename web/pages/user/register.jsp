@@ -96,7 +96,10 @@
                     <form action="http://localhost:8080/book/userServlet" method="post">
                         <label>用户名称：</label>
                         <input autocomplete="off" class="itxt" id="username" name="username" placeholder="请输入用户名"
-                               value="<%=request.getAttribute("username")==null?"":request.getAttribute("username") %>"
+
+                        <%-- EL表达式 --%>
+                               value="${empty requestScope.username?"":requestScope.username}"
+
                                tabindex="1" type="text"/>
                         <br/>
                         <br/>
@@ -115,7 +118,10 @@
                         <label>电子邮件：</label>
 
                         <input autocomplete="off" class="itxt" id="email" name="email" placeholder="请输入邮箱地址"
+
+                        <%-- jsp的表达式脚本 --%>
                                value="<%=request.getAttribute("email")==null?"":request.getAttribute("email")%>"
+
                                tabindex="1" type="text"/>
                         <br/>
                         <br/>

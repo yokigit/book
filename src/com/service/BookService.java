@@ -17,4 +17,6 @@ public interface BookService {
     List<Book> queryBooks();
 
     Page page(Integer pageNo);
+
+    Page pageByPrice(int pagNo, double min, double max);
 }

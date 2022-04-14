@@ -93,6 +93,7 @@ public class BookServlet extends BaseServlet {
         int pageNo = Integer.parseInt(req.getParameter("pageNo"));
 
         Page bookPage = bookService.page(pageNo);
+        bookPage.setUrl("manager/bookServlet?action=page");
 
         req.setAttribute("bookPage", bookPage);
 

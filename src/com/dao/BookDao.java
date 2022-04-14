@@ -20,7 +20,11 @@ public interface BookDao {
 
     List<Book> queryBooks();
 
-    List<Book> queryItems(Integer begin,Integer size);
+    List<Book> queryItems(Integer begin, Integer size);
 
     Long queryTotalCount();
+
+    Long queryTotalCountByPrice(double min, double max);
+
+    List<Book> queryItemsByPrice(int begin, int size ,double min, double max);
 }

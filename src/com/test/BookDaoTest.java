@@ -2,7 +2,10 @@ package com.test;
 
 import com.dao.BookDao;
 import com.dao.impl.BookDaoImpl;
+import com.pojo.Book;
 import org.junit.Test;
+
+import java.util.List;
 
 /**
  * @program: spring5_demo1
@@ -11,8 +14,8 @@ import org.junit.Test;
  */
 public class BookDaoTest {
     @Test
-    public void test(){
-        BookDao bookDao=new BookDaoImpl();
+    public void test() {
+        BookDao bookDao = new BookDaoImpl();
 //        bookDao.addBook(new Book(null,"1","1",1.0,1,1,"dd"));
 //
 //        System.out.println(bookDao.queryBookById(22));
@@ -33,7 +36,15 @@ public class BookDaoTest {
 //            System.out.println(book);
 //        }
 
-        System.out.println(bookDao.queryTotalCount());
+//        System.out.println(bookDao.queryTotalCount());
+
+        System.out.println(bookDao.queryTotalCountByPrice(10, 50));
+
+        List<Book> bookList = bookDao.queryItemsByPrice(0, 4, 10, 50);
+        for (Book book:bookList
+             ) {
+            System.out.println(book);
+        }
     }
 
 }

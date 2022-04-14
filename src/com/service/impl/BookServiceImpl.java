@@ -44,10 +44,10 @@ public class BookServiceImpl implements BookService {
     public Page<Book> page(Integer pageNo) {
         Page<Book> page = new Page<Book>();
 
-        int pageSize=page.getPageSize();
-
-        Integer pageTotalCount = Math.toIntExact(bookDao.queryTotalCount());
+        int pageTotalCount = Math.toIntExact(bookDao.queryTotalCount());
         page.setPageTotalCount(pageTotalCount);
+
+        int pageSize = page.getPageSize();
 
         int pageTotal;
         if (pageTotalCount % pageSize == 0) {
@@ -61,6 +61,28 @@ public class BookServiceImpl implements BookService {
 
         List<Book> bookList = bookDao.queryItems((pageNo - 1) * pageSize, pageSize);
         page.setItems(bookList);
+
+        return page;
+    }
+
+    @Override
+    public Page pageByPrice(int pageNo, double min, double max) {
+        Page<Book> page = new Page<>();
+
+        int pageTotalCount = Math.toIntExact(bookDao.queryTotalCountByPrice(min, max));
+        page.setPageTotalCount(pageTotalCount);
+
+        int pageSize = page.getPageSize();
+        if (pageTotalCount % pageSize == 0) {
+            page.setPageTotal(pageTotalCount / pageSize);
+        } else {
+            page.setPageTotal(pageTotalCount / pageSize + 1);
+        }
+
+        page.setPageNo(pageNo);
+
+        List<Book> items = bookDao.queryItemsByPrice((pageNo - 1) * pageSize, pageSize, min, max);
+        page.setItems(items);
 
         return page;
     }

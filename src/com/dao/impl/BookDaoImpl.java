@@ -55,4 +55,16 @@ public class BookDaoImpl extends BaseDao implements BookDao {
         String sql = "select count(*) from table_book";
         return (Long) queryForSingleValue(sql);
     }
+
+    @Override
+    public Long queryTotalCountByPrice(double min, double max) {
+        String sql = "select count(*) from table_book where price between ? and ?";
+        return (Long)queryForSingleValue(sql, min, max);
+    }
+
+    @Override
+    public List<Book> queryItemsByPrice(int begin, int size, double min, double max) {
+        String sql = "select * from table_book where price between ? and ? order by price limit ?, ?";
+        return queryForList(Book.class, sql, min, max, begin, size);
+    }
 }

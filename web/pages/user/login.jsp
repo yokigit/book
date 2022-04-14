@@ -42,7 +42,10 @@
                         <label>用户名称：</label>
                         <input autocomplete="off" class="itxt" name="username" placeholder="请输入用户名" tabindex="1"
                                type="text"
-                               value="<%=request.getAttribute("username")==null?"":request.getAttribute("username")%>"/>
+
+                               <%-- 使用empty运算判断域对象是否为空，输出响应  --%>
+                               value="${empty requestScope.username?"":requestScope.username}"/>
+
                         <br/>
                         <br/>
                         <label>用户密码：</label>
