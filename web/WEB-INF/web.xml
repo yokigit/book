@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    
+
     <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>com.web.UserServlet</servlet-class>
@@ -29,6 +29,24 @@
     <servlet-mapping>
         <servlet-name>ClientBookServlet</servlet-name>
         <url-pattern>/clientBookServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <url-pattern>/kaptcha.jpg</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.web.CartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cartServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

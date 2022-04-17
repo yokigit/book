@@ -40,7 +40,6 @@
         <%-- 传递修改的参数 --%>
         <input type="hidden" name="id" value="${param.id}">
 
-
         <table>
             <tr>
                 <td>名称</td>

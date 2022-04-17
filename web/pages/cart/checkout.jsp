@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,6 @@
 <div id="main">
 
     <h1>你的订单已结算，订单号为2937474382928484747</h1>
-
 
 </div>
 

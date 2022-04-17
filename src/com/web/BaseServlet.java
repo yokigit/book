@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 public abstract class BaseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String action = req.getParameter("action");
 
         try {

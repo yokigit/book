@@ -1,5 +1,7 @@
 package com.pojo;
 
+import java.math.BigDecimal;
+
 /**
  * @program: spring5_demo1
  * @author: yoki
@@ -9,7 +11,7 @@ public class Book {
     private Integer id;
     private String name;
     private String author;
-    private Double price;
+    private BigDecimal price;
     private Integer sales;
     private Integer stock;
     private String img_path;
@@ -17,7 +19,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(Integer id, String name, String author, Double price, Integer sales, Integer stock, String img_path) {
+    public Book(Integer id, String name, String author, BigDecimal price, Integer sales, Integer stock, String img_path) {
         this.id = id;
         this.name = name;
         this.author = author;
@@ -51,11 +53,11 @@ public class Book {
         this.author = author;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

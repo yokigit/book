@@ -65,6 +65,11 @@
                 }
             })
 
+            //点击刷新验证码
+            $("#code_img").click(function () {
+                this.src = "${basePath}kaptcha.jpg?d=" + new Date();
+            });
+
         });
     </script>
 </head>
@@ -126,8 +131,9 @@
                         <br/>
                         <br/>
                         <label>验证码：</label>
-                        <input class="itxt" id="code" name="code" style="width: 150px;" type="text" value=""/>
-                        <img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
+                        <input class="itxt" id="code" name="code" style="width: 90px;" type="text" value=""/>
+                        <img id="code_img" alt="" src="kaptcha.jpg"
+                             style="float: right; margin-right: 20px;width:150px">
                         <br/>
                         <br/>
 

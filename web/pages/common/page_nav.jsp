@@ -76,7 +76,7 @@
     </c:if>
 
     共${requestScope.bookPage.pageTotal}页，${requestScope.bookPage.pageTotalCount}条记录
-    到第<input type="text" value="${param.pageNo}" name="pn" id="pageNo_input" width="20px"/>页
+    到第<input type="text" value="${param.pageNo}" name="pn" id="pageNo_input" style="width: 20px"/>页
     <input type="button" id="searchPageBtn" value="确定">
 
     <script type="text/javascript">

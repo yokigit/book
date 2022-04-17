@@ -38,7 +38,7 @@
 
                 </div>
                 <div class="form">
-                    <form action="http://localhost:8080/book/userServlet" method="post">
+                    <form action="userServlet" method="post">
                         <label>用户名称：</label>
                         <input autocomplete="off" class="itxt" name="username" placeholder="请输入用户名" tabindex="1"
                                type="text"

@@ -42,11 +42,11 @@
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
                 <td>
-                    <a href="${requestScope.bookPage.url}?action=getBook&id=${book.id}&pageNo=${requestScope.bookPage.pageNo}">修改</a>
+                    <a href="manager/bookServlet?action=getBook&id=${book.id}&pageNo=${requestScope.bookPage.pageNo}">修改</a>
                 </td>
                 <td>
                     <a class="deleteClass"
-                       href="${requestScope.bookPage.url}?action=delete&id=${book.id}&pageNo=${requestScope.bookPage.pageTotalCount%requestScope.bookPage.pageSize!=1?requestScope.bookPage.pageNo:(requestScope.bookPage.pageNo==requestScope.bookPage.pageTotal?requestScope.bookPage.pageNo-1:requestScope.bookPage.pageNo)}">删除</a>
+                       href="manager/bookServlet?action=delete&id=${book.id}&pageNo=${requestScope.bookPage.pageTotalCount%requestScope.bookPage.pageSize!=1?requestScope.bookPage.pageNo:(requestScope.bookPage.pageNo==requestScope.bookPage.pageTotal?requestScope.bookPage.pageNo-1:requestScope.bookPage.pageNo)}">删除</a>
                 </td>
             </tr>
         </c:forEach>

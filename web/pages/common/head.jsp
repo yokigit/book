@@ -10,7 +10,7 @@
     String basePath = request.getScheme()
             + "://" + request.getServerName()
             + ":" + request.getServerPort()
-            + "/" + application.getContextPath() + "/";
+            + application.getContextPath() + "/";
     pageContext.setAttribute("basePath", basePath);
 %>
 
