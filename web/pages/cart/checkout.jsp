@@ -16,7 +16,7 @@
 <body>
 
 <div id="header">
-    <img class="logo_img" alt="" src="../../static/img/logo.gif">
+    <img class="logo_img" alt="" src="static/img/logo.gif">
     <span class="wel_word">结算</span>
     <%--	静态包含登录成功后的菜单栏	--%>
     <%@include file="/pages/common/menu.jsp" %>
@@ -24,10 +24,10 @@
 
 <div id="main">
 
-    <h1>你的订单已结算，订单号为2937474382928484747</h1>
+    <h1>你的订单已结算，订单号为${sessionScope.order_id}</h1>
 
 </div>
 
-<%@ include file="/pages/common/foot.jsp"%>
+<%@ include file="/pages/common/foot.jsp" %>
 </body>
 </html>

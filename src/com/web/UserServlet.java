@@ -35,7 +35,9 @@ public class UserServlet extends BaseServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = new User(null, username, password, null);
-        if (userService.Login(user) != null) {
+
+        user = userService.Login(user);
+        if (user != null) {
             System.out.println("登录成功");
             //保存用户登录信息到Session域
             request.getSession().setAttribute("user", user);
@@ -52,7 +54,7 @@ public class UserServlet extends BaseServlet {
     }
 
     protected void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String token= (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
+        String token = (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
         req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
 
         String code = req.getParameter("code");
