@@ -57,8 +57,8 @@ public class CartServlet extends BaseServlet {
         }
 
         //该图书库存 stock--
-        book.setStock(book.getStock() - 1);
-        bookService.updateBook(book);
+//        book.setStock(book.getStock() - 1);
+//        bookService.updateBook(book);
 
         //返回当前页
 //        resp.sendRedirect(req.getHeader("Referer"));

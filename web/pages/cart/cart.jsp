@@ -11,6 +11,15 @@
     <script type="text/javascript">
         $(function () {
 
+            $(".deleteItem").click(function () {
+                const bookName = $(this).parent().parent().find("td:first").text();
+                return confirm("确定删除《" + bookName + "》吗？");
+            });
+
+            $("#clearCart").click(function () {
+                return confirm("确定清空购物车吗？");
+            });
+
             $(".updateCount").change(function () {
                 const bookId = $(this).attr("bookId");
                 const bookName = $(this).parent().parent().find("td:first").text();
@@ -66,7 +75,7 @@
                     </td>
                     <td>${item.value.price}</td>
                     <td>${item.value.totalPrice}</td>
-                    <td><a href="cartServlet?action=deleteItem&id=${item.value.id}">删除</a></td>
+                    <td><a class="deleteItem" href="cartServlet?action=deleteItem&id=${item.value.id}">删除</a></td>
                 </tr>
             </c:forEach>
 
@@ -78,13 +87,14 @@
         <div class="cart_info">
             <span class="cart_span">购物车中共有<span class="b_count">${sessionScope.cart.totalCount}</span>件商品</span>
             <span class="cart_span">总金额<span class="b_price">${sessionScope.cart.totalPrice}</span>元</span>
-            <span class="cart_span"><a href="cartServlet?action=clear">清空购物车</a></span>
-            <span class="cart_span"><a href="pages/cart/checkout.jsp">去结账</a></span>
+            <span class="cart_span"><a id="clearCart" href="cartServlet?action=clear">清空购物车</a></span>
+            <span class="cart_span"><a href="orderServlet?action=createOrder">去结账</a></span>
         </div>
     </c:if>
 
 </div>
 
 <%@ include file="/pages/common/foot.jsp" %>
+
 </body>
 </html>
